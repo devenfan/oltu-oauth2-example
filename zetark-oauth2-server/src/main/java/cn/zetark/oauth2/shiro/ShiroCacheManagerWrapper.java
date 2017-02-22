@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package cn.zetark.oauth2.spring;
+package cn.zetark.oauth2.shiro;
 
 import net.sf.ehcache.Ehcache;
 import org.apache.shiro.cache.Cache;
@@ -14,7 +14,7 @@ import org.springframework.cache.support.SimpleValueWrapper;
 
 import java.util.*;
 
-public class SpringCacheManagerWrapper implements CacheManager {
+public class ShiroCacheManagerWrapper implements CacheManager {
 
     private org.springframework.cache.CacheManager cacheManager;
 
@@ -30,13 +30,13 @@ public class SpringCacheManagerWrapper implements CacheManager {
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         org.springframework.cache.Cache springCache = cacheManager.getCache(name);
-        return new SpringCacheWrapper(springCache);
+        return new ShiroCacheWrapper(springCache);
     }
 
-    static class SpringCacheWrapper implements Cache {
+    static class ShiroCacheWrapper implements Cache {
         private org.springframework.cache.Cache springCache;
 
-        SpringCacheWrapper(org.springframework.cache.Cache springCache) {
+        ShiroCacheWrapper(org.springframework.cache.Cache springCache) {
             this.springCache = springCache;
         }
 

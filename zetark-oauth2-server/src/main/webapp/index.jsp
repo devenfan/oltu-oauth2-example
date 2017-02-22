@@ -45,7 +45,7 @@ client_secret           d8346ea2-6017-43ed-ad68-19c0f971738b    应用secret
 
 2. 请求授权码
 
-http://localhost:8080/zetark-oauth2-server/authorize?client_id=c1ebe466-1cdc-4bd3-ab69-77c3561b9dee&response_type=code&redirect_uri=http://aimeizi.net
+http://localhost:8080/zetark-oauth2-server/authorize?client_id=c1ebe466-1cdc-4bd3-ab69-77c3561b9dee&response_type=code&redirect_uri=http://localhost:8080/authCallback
 
 参数说明
 
@@ -54,10 +54,15 @@ response_type           返回授权码的标识
 redirect_uri            回调地址
 
 上面的网站会打开oauth server的用户登录页面。用户输入正确的用户名和密码以POST方式提交后会重定向到用户所填的回调地址并在地址后携带授权码.
+默认用户名密码： admin / 123456
+
+*你也可以把用户名密码按照如下方式访问：
+http://localhost:8080/zetark-oauth2-server/authorize?username=admin&password=123456&client_id=c1ebe466-1cdc-4bd3-ab69-77c3561b9dee&response_type=code&redirect_uri=http://localhost:8080/authCallback
+
 
 请求成功后会返回如下的页面:
 
-http://aimeizi.net/?code=63910432da9186b22b1ad888d55ae8ae
+http://localhost:8080/authCallback?code=63910432da9186b22b1ad888d55ae8ae
 
 这里code=63910432da9186b22b1ad888d55ae8ae 即授权码
 
@@ -73,7 +78,11 @@ client_id       c1ebe466-1cdc-4bd3-ab69-77c3561b9dee            应用id
 client_secret   d8346ea2-6017-43ed-ad68-19c0f971738b            应用secret
 grant_type      authorization_code                              用于传递授权码的参数名authorization_code
 code            63910432da9186b22b1ad888d55ae8ae                用户登录授权后的授权码
-redirect_uri    http://aimeizi.net                              回调地址
+redirect_uri    http://localhost:8080/tokenCallback             回调地址
+
+*Oltu禁止采用get的方式获取accessToken：
+http://localhost:8080/zetark-oauth2-server/accessToken?client_id=c1ebe466-1cdc-4bd3-ab69-77c3561b9dee&client_secret=d8346ea2-6017-43ed-ad68-19c0f971738b&grant_type=authorization_code&code=63910432da9186b22b1ad888d55ae8ae&http://localhost:8080/tokenCallback
+
 
 最终返回如下数据
 

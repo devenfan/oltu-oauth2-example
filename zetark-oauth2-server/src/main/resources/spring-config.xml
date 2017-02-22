@@ -78,5 +78,6 @@
         <aop:pointcut id="txPointcut" expression="execution(* cn.zetark.oauth2.service..*+.*(..))"/>
         <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
-    <import resource="classpath:spring-config-cache.xml"/>
+
+    <import resource="classpath:spring-cache-ehcache.xml"/>
 </beans>

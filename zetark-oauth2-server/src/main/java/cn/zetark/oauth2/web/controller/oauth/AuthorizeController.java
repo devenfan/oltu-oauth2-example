@@ -121,10 +121,11 @@ public class AuthorizeController {
     }
 
     private boolean login(HttpServletRequest request) {
-        if("get".equalsIgnoreCase(request.getMethod())) {
-            request.setAttribute("error","非法的请求");
-            return false;
-        }
+        // 这里不允许通过get的方式访问，先绕过
+//        if("get".equalsIgnoreCase(request.getMethod())) {
+//            request.setAttribute("error","非法的请求");
+//            return false;
+//        }
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
